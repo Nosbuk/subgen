@@ -2,7 +2,7 @@ import { Divider, Stack, Typography } from "@mui/material";
 
 import { PrngInput } from "../PrngInput/PrngInput";
 import { SliderInput } from "../SliderInput/SliderInput";
-import { SettingsContextReducerActionTypes } from "../../contexts/SettingsContext";
+import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
 
 const stackSx = {
   padding: "10px 20px",
@@ -16,11 +16,11 @@ export const SettingsForm = () => {
   return (
     <Stack direction="column" sx={stackSx}>
       <Typography variant="h5" component="h5">
-        Settings
+        Markov
       </Typography>
       <Divider sx={dividerSx} />
       <SliderInput
-        actionType={SettingsContextReducerActionTypes.SET_MAX_TRIES}
+        actionType={MarkovContextReducerActionTypes.SET_MAX_TRIES}
         title="Max Tries"
         min={1}
         max={1000}
@@ -29,7 +29,7 @@ export const SettingsForm = () => {
       <PrngInput />
       <Divider sx={dividerSx} />
       <SliderInput
-        actionType={SettingsContextReducerActionTypes.SET_STATE_SIZE}
+        actionType={MarkovContextReducerActionTypes.SET_STATE_SIZE}
         title="State Size"
         min={1}
         max={10}

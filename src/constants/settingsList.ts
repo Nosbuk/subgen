@@ -1,4 +1,4 @@
-const SETTINGS_LIST = [
+const Markov_LIST = [
   {
     name: "Max Tries",
     key: "maxTries",

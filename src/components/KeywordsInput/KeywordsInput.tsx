@@ -6,16 +6,16 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { useSettings } from "../../hooks/useSettings";
+import { useMarkov } from "../../hooks/useMarkov";
 import {
-  SettingsContextReducerActionTypes,
-  SettingsContextStateKeys,
-} from "../../contexts/SettingsContext";
+  MarkovContextReducerActionTypes,
+  MarkovContextStateKeys,
+} from "../../contexts/MarkovContext";
 
 const KEYWORDS = "keywords";
 
 export const KeywordsInput = () => {
-  const { settingsState, dispatchSettings } = useSettings();
+  const { markovState, dispatchMarkov } = useMarkov();
 
   const addKeywords = (formData: FormData) => {
     const keywords = formData.get(KEYWORDS)?.toString().split(" ");
@@ -24,24 +24,24 @@ export const KeywordsInput = () => {
       return;
     }
 
-    dispatchSettings({
-      type: SettingsContextReducerActionTypes.ADD_KEYWORDS,
+    dispatchMarkov({
+      type: MarkovContextReducerActionTypes.ADD_KEYWORDS,
       payload: keywords,
     });
   };
 
   const getOnKeywordDelete = (keyword: string) => {
     return () => {
-      dispatchSettings({
-        type: SettingsContextReducerActionTypes.REMOVE_KEYWORD,
+      dispatchMarkov({
+        type: MarkovContextReducerActionTypes.REMOVE_KEYWORD,
         payload: keyword,
       });
     };
   };
 
   const onGenerateClick = () => {
-    dispatchSettings({
-      type: SettingsContextReducerActionTypes.GENERATE_STRING,
+    dispatchMarkov({
+      type: MarkovContextReducerActionTypes.GENERATE_RESULT,
       payload: undefined,
     });
   };
@@ -85,8 +85,8 @@ export const KeywordsInput = () => {
         >
           Generate
         </Button>
-        {settingsState[SettingsContextStateKeys.KEYWORDS].length > 0 ? (
-          settingsState[SettingsContextStateKeys.KEYWORDS].map((keyword) => (
+        {markovState[MarkovContextStateKeys.KEYWORDS].length > 0 ? (
+          markovState[MarkovContextStateKeys.KEYWORDS].map((keyword) => (
             <Chip
               key={keyword}
               label={keyword}

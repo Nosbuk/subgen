@@ -1,12 +1,12 @@
-import { SettingsContextStateKeys } from "../../contexts/SettingsContext";
-import { useSettings } from "../../hooks/useSettings";
+import { MarkovContextStateKeys } from "../../contexts/MarkovContext";
+import { useMarkov } from "../../hooks/useMarkov";
 
 export const MarkovOutput = () => {
-  const { settingsState } = useSettings();
+  const { markovState } = useMarkov();
 
   const generatedString =
-    settingsState[SettingsContextStateKeys.GENERATED_STRING];
-  const isGeneratedStringNotEmpty = generatedString.length > 0;
+    markovState[MarkovContextStateKeys.GENERATED_RESULT].string;
+  const isGeneratedStringNotEmpty = generatedString?.length > 0;
   return (
     <div>
       {isGeneratedStringNotEmpty

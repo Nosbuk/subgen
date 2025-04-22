@@ -1,14 +1,14 @@
 import { Container, CssBaseline, Grid } from "@mui/material";
 
 import { HTML_ELEMENTS } from "../../constants/htmlElements";
-import { SettingsContextProvider } from "../../contexts/SettingsContext";
+import { MarkovContextProvider } from "../../contexts/MarkovContext";
 import { SettingsForm } from "../SettingsForm/SettingsForm";
 import { KeywordsInput } from "../KeywordsInput/KeywordsInput";
 import { MarkovOutput } from "../MarkovOutput/MarkovOutput";
 
 export const App = () => {
   return (
-    <SettingsContextProvider>
+    <MarkovContextProvider>
       <CssBaseline />
       <Container component={HTML_ELEMENTS.MAIN} maxWidth={false}>
         <Grid container spacing={0}>
@@ -21,6 +21,6 @@ export const App = () => {
           </Grid>
         </Grid>
       </Container>
-    </SettingsContextProvider>
+    </MarkovContextProvider>
   );
 };

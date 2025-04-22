@@ -1,19 +1,19 @@
 import Markov, { MarkovResult } from "markov-strings";
 import { SAMPLE_STRINGS } from "../constants/sampleStrings";
 
-interface GenerateStringParams {
+interface getMarkovResultParams {
   maxTries: number;
   prng: () => number;
   stateSize: number;
   keywords: string[];
 }
 
-export const generateString = ({
+export const getMarkovResult = ({
   maxTries,
   prng,
   stateSize,
   keywords,
-}: GenerateStringParams) => {
+}: getMarkovResultParams) => {
   const markov = new Markov({ stateSize: stateSize });
 
   const data = [...new Set(SAMPLE_STRINGS)];
@@ -24,7 +24,11 @@ export const generateString = ({
     maxTries,
     prng,
 
-    filter: ({ string }: MarkovResult) => checkForKeywords(string, keywords),
+    filter: (result: MarkovResult) => {
+      const { string } = result;
+
+      return checkForKeywords(string, keywords);
+    },
   };
 
   const result = markov.generate(options);

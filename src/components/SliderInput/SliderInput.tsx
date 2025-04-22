@@ -6,8 +6,8 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useSettings } from "../../hooks/useSettings";
-import { SettingsContextReducerActionTypes } from "../../contexts/SettingsContext";
+import { useMarkov } from "../../hooks/useMarkov";
+import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
 import { ChangeEvent } from "react";
 
 const sliderDefaultProps: SliderProps = {
@@ -18,20 +18,20 @@ const sliderDefaultProps: SliderProps = {
 
 interface Props {
   actionType:
-    | SettingsContextReducerActionTypes.SET_MAX_TRIES
-    | SettingsContextReducerActionTypes.SET_STATE_SIZE;
+    | MarkovContextReducerActionTypes.SET_MAX_TRIES
+    | MarkovContextReducerActionTypes.SET_STATE_SIZE;
   title: string;
   min: number;
   max: number;
 }
 
 export const SliderInput = ({ actionType, title, min, max }: Props) => {
-  const { settingsState, dispatchSettings } = useSettings();
+  const { markovState, dispatchMarkov } = useMarkov();
 
   const onSliderChange = (_: Event, value: number | number[]) => {
     const singleValue = Array.isArray(value) ? value[0] : value;
 
-    dispatchSettings({
+    dispatchMarkov({
       type: actionType,
       payload: Number(singleValue),
     });
@@ -48,7 +48,7 @@ export const SliderInput = ({ actionType, title, min, max }: Props) => {
       return;
     }
 
-    dispatchSettings({
+    dispatchMarkov({
       type: actionType,
       payload: numberValue,
     });
@@ -63,14 +63,14 @@ export const SliderInput = ({ actionType, title, min, max }: Props) => {
           variant="outlined"
           type="number"
           onChange={onFieldChange}
-          value={settingsState[actionType]}
+          value={markovState[actionType]}
         />
       </Stack>
       <Slider
         {...sliderDefaultProps}
         min={min}
         max={max}
-        value={Number(settingsState[actionType])}
+        value={Number(markovState[actionType])}
         onChange={onSliderChange}
       />
     </>

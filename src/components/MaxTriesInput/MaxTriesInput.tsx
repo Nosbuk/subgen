@@ -1,7 +1,7 @@
 import { Slider, SliderProps, Typography } from "@mui/material";
 
-import { useSettings } from "../../hooks/useSettings";
-import { SettingsContextReducerActionTypes } from "../../contexts/SettingsContext";
+import { useMarkov } from "../../hooks/useMarkov";
+import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
 
 const sliderDefaultProps: SliderProps = {
   min: 1,
@@ -11,13 +11,13 @@ const sliderDefaultProps: SliderProps = {
 };
 
 export const MaxTriesInput = () => {
-  const { settingsState, dispatchSettings } = useSettings();
+  const { markovState, dispatchMarkov } = useMarkov();
 
   const onChange = (_: Event, value: number | number[]) => {
     const stateSize = Array.isArray(value) ? value[0] : value;
 
-    dispatchSettings({
-      type: SettingsContextReducerActionTypes.SET_STATE_SIZE,
+    dispatchMarkov({
+      type: MarkovContextReducerActionTypes.SET_STATE_SIZE,
       payload: Number(stateSize),
     });
   };
@@ -27,7 +27,7 @@ export const MaxTriesInput = () => {
       <Typography variant="body1">State Size:</Typography>
       <Slider
         {...sliderDefaultProps}
-        value={settingsState.stateSize}
+        value={markovState.stateSize}
         onChange={onChange}
       />
     </>

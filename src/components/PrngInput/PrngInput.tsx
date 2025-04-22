@@ -1,18 +1,18 @@
 import { MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { useSettings } from "../../hooks/useSettings";
+import { useMarkov } from "../../hooks/useMarkov";
 import {
   PRNG,
-  SettingsContextReducerActionTypes,
-} from "../../contexts/SettingsContext";
+  MarkovContextReducerActionTypes,
+} from "../../contexts/MarkovContext";
 
 export const PrngInput = () => {
-  const { settingsState, dispatchSettings } = useSettings();
+  const { markovState, dispatchMarkov } = useMarkov();
 
   const onChange = (event: SelectChangeEvent) => {
     const { value } = event.target;
 
-    dispatchSettings({
-      type: SettingsContextReducerActionTypes.SET_PRNG,
+    dispatchMarkov({
+      type: MarkovContextReducerActionTypes.SET_PRNG,
       payload: value,
     });
   };
@@ -20,7 +20,7 @@ export const PrngInput = () => {
   return (
     <>
       <Typography variant="body1">Pseudo Random Number Generator:</Typography>
-      <Select value={settingsState.prng} onChange={onChange}>
+      <Select value={markovState.prng} onChange={onChange}>
         <MenuItem value={PRNG.MATH_RANDOM}>Math.random</MenuItem>
         <MenuItem value={PRNG.OTHER}>Other</MenuItem>
       </Select>
