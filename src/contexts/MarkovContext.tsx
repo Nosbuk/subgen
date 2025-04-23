@@ -7,8 +7,8 @@ export enum MarkovContextReducerActionTypes {
   SET_MAX_TRIES = "maxTries",
   SET_PRNG = "prng",
   SET_STATE_SIZE = "stateSize",
-  ADD_KEYWORDS = "add_keywords",
-  REMOVE_KEYWORD = "remove_keyword",
+  ADD_KEYWORDS = "addKeywords",
+  REMOVE_KEYWORD = "removeKeyword",
   GENERATE_RESULT = "generateResult",
 }
 
@@ -33,6 +33,7 @@ export enum PRNG {
   OTHER = "other",
 }
 
+// TODO: Add more prngs
 export const prngDictionary = {
   [PRNG.MATH_RANDOM]: Math.random,
   [PRNG.OTHER]: Math.random,
@@ -74,17 +75,17 @@ const MarkovContextReducer = (
     case MarkovContextReducerActionTypes.SET_MAX_TRIES:
       return {
         ...state,
-        maxTries: payload,
+        [MarkovContextStateKeys.MAX_TRIES]: payload,
       };
     case MarkovContextReducerActionTypes.SET_PRNG:
       return {
         ...state,
-        prng: payload,
+        [MarkovContextStateKeys.PRNG]: payload,
       };
     case MarkovContextReducerActionTypes.SET_STATE_SIZE:
       return {
         ...state,
-        stateSize: payload,
+        [MarkovContextStateKeys.STATE_SIZE]: payload,
       };
     case MarkovContextReducerActionTypes.ADD_KEYWORDS:
       return {
@@ -106,6 +107,8 @@ const MarkovContextReducer = (
         ...state,
         [MarkovContextStateKeys.GENERATED_RESULT]: getMarkovResult({
           maxTries: state[MarkovContextStateKeys.MAX_TRIES],
+
+          // TODO: Add more prngs and index them from dictionary here
           prng: Math.random,
           stateSize: state[MarkovContextStateKeys.STATE_SIZE],
           keywords: state[MarkovContextStateKeys.KEYWORDS],

@@ -1,5 +1,5 @@
 import { MarkovContextStateKeys } from "../../contexts/MarkovContext";
-import { useMarkov } from "../../hooks/useMarkov";
+import { useMarkov } from "../../hooks/useSetting";
 
 export const MarkovOutput = () => {
   const { markovState } = useMarkov();

@@ -6,7 +6,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { useMarkov } from "../../hooks/useMarkov";
+import { useMarkov } from "../../hooks/useSetting";
 import {
   MarkovContextReducerActionTypes,
   MarkovContextStateKeys,

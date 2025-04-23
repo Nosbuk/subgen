@@ -8,6 +8,7 @@ const stackSx = {
   padding: "10px 20px",
   borderLeft: "1px gray solid",
   height: "100vh",
+  overflow: "auto",
 };
 
 const dividerSx = { margin: "20px 0" };
@@ -16,7 +17,7 @@ export const SettingsForm = () => {
   return (
     <Stack direction="column" sx={stackSx}>
       <Typography variant="h5" component="h5">
-        Markov
+        Markov Settings
       </Typography>
       <Divider sx={dividerSx} />
       <SliderInput

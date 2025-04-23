@@ -1,6 +1,6 @@
 import { Slider, SliderProps, Typography } from "@mui/material";
 
-import { useMarkov } from "../../hooks/useMarkov";
+import { useMarkov } from "../../hooks/useSetting";
 import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
 
 const sliderDefaultProps: SliderProps = {
