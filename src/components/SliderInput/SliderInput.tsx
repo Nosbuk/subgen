@@ -7,7 +7,10 @@ import {
 } from "@mui/material";
 
 import { useMarkov } from "../../hooks/useSetting";
-import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
+import {
+  MarkovContextReducerActionTargets,
+  MarkovContextReducerActionTypes,
+} from "../../contexts/MarkovContext";
 import { ChangeEvent } from "react";
 
 const sliderDefaultProps: SliderProps = {
@@ -19,6 +22,7 @@ const sliderDefaultProps: SliderProps = {
 interface Props {
   actionType:
     | MarkovContextReducerActionTypes.SET_MAX_TRIES
+    | MarkovContextReducerActionTypes.SET_AMOUNT
     | MarkovContextReducerActionTypes.SET_STATE_SIZE;
   title: string;
   min: number;
@@ -27,6 +31,8 @@ interface Props {
 
 export const SliderInput = ({ actionType, title, min, max }: Props) => {
   const { markovState, dispatchMarkov } = useMarkov();
+
+  const value = markovState[MarkovContextReducerActionTargets[actionType]];
 
   const onSliderChange = (_: Event, value: number | number[]) => {
     const singleValue = Array.isArray(value) ? value[0] : value;
@@ -59,18 +65,20 @@ export const SliderInput = ({ actionType, title, min, max }: Props) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="body1">{title}</Typography>
         <TextField
+          sx={{ width: "80px" }}
           id={actionType}
           variant="outlined"
           type="number"
           onChange={onFieldChange}
-          value={markovState[actionType]}
+          value={value}
+          size="small"
         />
       </Stack>
       <Slider
         {...sliderDefaultProps}
         min={min}
         max={max}
-        value={Number(markovState[actionType])}
+        value={Number(value)}
         onChange={onSliderChange}
       />
     </>

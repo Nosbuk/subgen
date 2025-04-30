@@ -1,40 +1,55 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 
 import { PrngInput } from "../PrngInput/PrngInput";
 import { SliderInput } from "../SliderInput/SliderInput";
 import { MarkovContextReducerActionTypes } from "../../contexts/MarkovContext";
 
 const stackSx = {
-  padding: "10px 20px",
+  padding: "10px 0",
   borderLeft: "1px gray solid",
-  height: "100vh",
+  height: "calc(100vh - 153px)",
   overflow: "auto",
 };
 
-const dividerSx = { margin: "20px 0" };
+const boxSx = { padding: "20px 30px 10px 30px", borderTop: "1px gray solid" };
+
+const titleSx = {
+  margin: "20px 0 20px 30px",
+};
 
 export const SettingsForm = () => {
   return (
     <Stack direction="column" sx={stackSx}>
-      <Typography variant="h5" component="h5">
+      <Typography variant="h5" component="h5" sx={titleSx}>
         Markov Settings
       </Typography>
-      <Divider sx={dividerSx} />
-      <SliderInput
-        actionType={MarkovContextReducerActionTypes.SET_MAX_TRIES}
-        title="Max Tries"
-        min={1}
-        max={1000}
-      />
-      <Divider sx={dividerSx} />
-      <PrngInput />
-      <Divider sx={dividerSx} />
-      <SliderInput
-        actionType={MarkovContextReducerActionTypes.SET_STATE_SIZE}
-        title="State Size"
-        min={1}
-        max={10}
-      />
+      <Box sx={boxSx}>
+        <SliderInput
+          actionType={MarkovContextReducerActionTypes.SET_MAX_TRIES}
+          title="Max Tries"
+          min={1}
+          max={1000}
+        />
+      </Box>
+      <Box sx={boxSx}>
+        <SliderInput
+          actionType={MarkovContextReducerActionTypes.SET_AMOUNT}
+          title="Results Amount"
+          min={1}
+          max={20}
+        />
+      </Box>
+      <Box sx={boxSx}>
+        <SliderInput
+          actionType={MarkovContextReducerActionTypes.SET_STATE_SIZE}
+          title="State Size"
+          min={1}
+          max={10}
+        />
+      </Box>
+      <Box sx={boxSx}>
+        <PrngInput />
+      </Box>
     </Stack>
   );
 };
